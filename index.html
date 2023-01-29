@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./index.js" defer></script>
+    <link href="/style.css" rel="stylesheet"></link>
+    <script src="/server.js" defer></script>
+    <title>Login Page</title>
+</head>
+<body>
+    <header>
+        <nav>
+          <img src="logo.jpeg" alt="Logo">
+          <h1>Schlep Fit</h1>
+        </nav>
+      </header>
+      <div class="container">
+        <form id="user_login" action="/login" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+            <input type="submit" value="Login">
+          </form>
+    </div>
+    <footer>
+      <a href="/create-account">Create an account</a> |
+          <a href="/reset-password">Forgot your password?</a>
+    </footer>
+</body>
+</html>

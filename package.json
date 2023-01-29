@@ -1,0 +1,23 @@
+{
+  "name": "first_exer_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "client.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "jsdom": "^21.1.0",
+    "nodemon": "^2.0.20",
+    "path": "^0.12.7",
+    "postgres": "^3.3.3"
+  }
+}

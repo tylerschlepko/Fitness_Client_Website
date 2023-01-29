@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./style.css" rel="stylesheet">
+    <script src="./server.js" defer=""></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav>
+          <h1 id="user_header">Tyler Schlepko | Strength Plan | Week 6</h1>
+        </nav>
+    </header>
+    <div class="container">
+        <div id="goalNum" class="title">Goal</div>
+        <p>Squat: <span id="goalSquat" class="highlight">445</span></p>
+        <p>Bench: <span id="goalBench" class="highlight">335</span></p>
+        <p>Deadlift: <span id="goalDeadlift" class="highlight">515</span></p>
+        <p>Weight: <span id="goalWeight" class="highlight">220</span></p>
+        <p>Goal Review In: <span class="highlight" id="goal-time">2 days</span></p>
+    </div>
+    <div class="container">
+        <div class="title">Current</div>
+        <p>Squat: <span id="currentSquat" class="highlight">405</span></p>
+        <p>Bench: <span id="currentBench" class="highlight">315</span></p>
+        <p>Deadlift: <span id="currentDeadlift" class="highlight">495</span></p>
+        <p>Weight: <span id="currentWeight" class="highlight">225</span></p>
+    </div>
+    <form id="update_current" action="/update_current" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username"><br>
+        <label for="password">Password:</label>
+        <input type="text" id="password" name="password"><br>
+        <input type="submit" value="Update">
+    </form>
+
+
+
+</body></html>
