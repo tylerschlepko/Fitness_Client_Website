@@ -9,30 +9,48 @@
 <body>
     <header>
         <nav>
-          <h1 id="user_header">Tyler Schlepko | Strength Plan | Week 6</h1>
+          <h1 id="user_header" name="1">Tyler Schlepko | Strength Plan | Week 6</h1>
         </nav>
     </header>
     <div class="container">
-        <div id="goalNum" class="title">Goal</div>
-        <p>Squat: <span id="goalSquat" class="highlight">445</span></p>
-        <p>Bench: <span id="goalBench" class="highlight">335</span></p>
-        <p>Deadlift: <span id="goalDeadlift" class="highlight">515</span></p>
-        <p>Weight: <span id="goalWeight" class="highlight">220</span></p>
-        <p>Goal Review In: <span class="highlight" id="goal-time">1 days</span></p>
+        <div id="goalNum" class="title">Goals</div>
+        <p>Squat: <span id="goalSquat" class="highlight">445 lbs</span></p>
+        <p>Bench: <span id="goalBench" class="highlight">335 lbs</span></p>
+        <p>Deadlift: <span id="goalDeadlift" class="highlight">515 lbs</span></p>
+        <p>Weight: <span id="goalWeight" class="highlight">220 lbs</span></p>
+        <p>Goal Review In: <span class="highlight" id="goal-time">28 days</span></p>
     </div>
+    <form id="update_current" action="/update_goals" method="post">
+        <h1>Update Your Goals</h1><br>
+        <label for="newSquat">Squat:</label>
+        <input type="text" id="newSquat" name="newSquat" required=""><br>
+        <label for="newBench">Bench:</label>
+        <input type="text" id="newBench" name="newBench" required=""><br>
+        <label for="newDeadlift">Deadlift:</label>
+        <input type="text" id="newDeadlift" name="newDeadlift" required=""><br>
+        <label for="newWeight">Weight:</label>
+        <input type="text" id="newWeight" name="newWeight" required=""><br>
+        <label for="newDate">Completion Date:</label>
+        <input type="text" placeholder="YYYY-MM-DD" id="newDate" name="newDate" required=""><br>
+        <input type="submit" value="Update">
+    </form>
     <div class="container">
         <div class="title">Current</div>
-        <p>Squat: <span id="currentSquat" class="highlight">405</span></p>
-        <p>Bench: <span id="currentBench" class="highlight">315</span></p>
-        <p>Deadlift: <span id="currentDeadlift" class="highlight">495</span></p>
-        <p>Weight: <span id="currentWeight" class="highlight">225</span></p>
+        <p>Squat: <span id="currentSquat" class="highlight">405 lbs</span></p>
+        <p>Bench: <span id="currentBench" class="highlight">315 lbs</span></p>
+        <p>Deadlift: <span id="currentDeadlift" class="highlight">495 lbs</span></p>
+        <p>Weight: <span id="currentWeight" class="highlight">225 lbs</span></p>
     </div>
     <form id="update_current" action="/update_current" method="post">
-        <div>Update Current Progress</div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username"><br>
-        <label for="password">Password:</label>
-        <input type="text" id="password" name="password"><br>
+        <h1>Update Current Progress</h1><br>
+        <label for="updateSquat">Squat:</label>
+        <input type="text" id="updateSquat" name="updateSquat" required=""><br>
+        <label for="updateBench">Bench:</label>
+        <input type="text" id="updateBench" name="updateBench" required=""><br>
+        <label for="updateDeadlift">Deadlift:</label>
+        <input type="text" id="updateDeadlift" name="updateDeadlift" required=""><br>
+        <label for="updateWeight">Weight:</label>
+        <input type="text" id="updateWeight" name="updateWeight" required=""><br>
         <input type="submit" value="Update">
     </form>
 

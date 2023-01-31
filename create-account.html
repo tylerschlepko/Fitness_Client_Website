@@ -11,17 +11,52 @@
       </nav>
     </header>
     <div class="container">
-      <form action="#" method="post">
+      <form action="/make-account" method="post">
+        <h1>Input Your User Info</h1><br>
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
-        <br><br>
+        <br>
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required>
-        <br><br>
+        <br>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
-        <br><br>
-        <input type="submit" value="Submit">
+        <br>
+        <h1>Input Your Current Info</h1><br>
+        <label for="first_name">First Name:</label>
+        <input type="first_name" id="first_name" name="first_name" required>
+        <br>
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" required>
+        <br>
+        <label for="current_squat">Squat:</label>
+        <input type="number" id="curren_squat" name="current_squat" required=""><br>
+        <label for="current_bench">Bench:</label>
+        <input type="number" id="current_bench" name="current_bench" required=""><br>
+        <label for="current_deadlift">Deadlift:</label>
+        <input type="number" id="current_deadlift" name="current_deadlift" required=""><br>
+        <label for="current_weight">Weight:</label>
+        <input type="number" id="current_weight" name="current_weight" required=""><br>
+        <br>
+        <h1>Input Your Goals</h1><br>
+        <label for="squat">Squat:</label>
+        <input type="number" id="squat" name="squat" required=""><br>
+        <label for="bench">Bench:</label>
+        <input type="number" id="bench" name="bench" required=""><br>
+        <label for="deadlift">Deadlift:</label>
+        <input type="number" id="deadlift" name="deadlift" required=""><br>
+        <label for="weight">Weight:</label>
+        <input type="number" id="weight" name="weight" required=""><br>
+        <label for="date">Completion Date:</label>
+        <input type="number" placeholder="YYYY-MM-DD" id="date" name="date" required=""><br>
+        <h1>Select Your Program</h1><br>
+        <select name="plan">
+          <option value="1">Strength Plan</option>
+          <option value="2">Endurance Plan</option>
+          <option value="3">Power Plan</option>
+        </select>
+        <br>
+        <input type="submit" value="Create Account">
       </form>
     </div>
   </body>
