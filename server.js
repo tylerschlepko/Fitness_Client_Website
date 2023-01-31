@@ -1,4 +1,4 @@
-import {createNewUser ,updateCurrent, logInFunc, indexHtml, forgotPasswordLink, createAccountLink, updateGoals} from './client.js'
+import {resetPassword, deleteAccount, createNewUser ,updateCurrent, logInFunc, indexHtml, forgotPasswordLink, createAccountLink, updateGoals} from './client.js'
 import express from "express";
 import dotenv from 'dotenv'
 import path from 'path'
@@ -28,6 +28,10 @@ app.post('/update_current', updateCurrent)
 app.post('/update_goals', updateGoals)
 
 app.post('/make-account', createNewUser)
+
+app.post('/reset', resetPassword)
+
+app.post('/delete', deleteAccount)
 
 app.listen(PORT, (error)=>{
     if (error){

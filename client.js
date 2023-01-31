@@ -225,7 +225,53 @@ const createNewUser = async (req, res) =>{
 the database from all of the inputs */
 
 const resetPassword = async (req, res) =>{
+    try {
+        const {username, email, newPassword} = req.body
 
+        await sql`
+        UPDATE login
+        SET password = ${newPassword}
+        WHERE username = ${username} and email = ${email}
+        `
+        res.sendFile(path.join(process.cwd(), 'index.html'))
+    } catch (error) {
+        throw error
+    }
+} /** Takes in clients username email and a new password 
+and updates their login with a new password */
+
+const deleteAccount = async (req, res) =>{
+    try {
+        const htmlpath = path.join(process.cwd(), 'login.html')
+        const html = fs.readFileSync(htmlpath)
+        const dom = new JSDOM(html)
+        const {document} = dom.window
+
+        const userId = document.getElementById('user_header').getAttribute('name')
+
+        const loginId = await sql`
+        SELECT login_id FROM clients
+        WHERE id = ${parseInt(userId)}
+        `
+        console.log(loginId)
+        const id = loginId[0]["login_id"]
+
+        await sql`
+        DELETE FROM client_goals WHERE client_id = ${userId}
+        `
+        
+        await sql`
+        DELETE FROM clients WHERE id = ${userId}
+        
+        `
+        await sql`
+        DELETE FROM login WHERE id = ${id}
+        
+        `
+        res.sendFile(path.join(process.cwd(), 'index.html'))
+    } catch (error) {
+        throw error
+    }
 }
 
-export {forgotPasswordLink, createAccountLink, logInFunc, indexHtml, updateGoals, updateCurrent, createNewUser, resetPassword}
+export {forgotPasswordLink, createAccountLink, logInFunc, indexHtml, updateGoals, updateCurrent, createNewUser, resetPassword, deleteAccount}
