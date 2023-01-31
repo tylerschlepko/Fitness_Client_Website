@@ -185,7 +185,7 @@ inputs they put in for the form */
 
 const createNewUser = async (req, res) =>{
     try {
-        const {username, password, email, first_name, last_name, current_squat, current_bench, current_deadlift, current_weight, squat, bench, deadlift, weight, date} = req.body
+        const {username, password, email, first_name, last_name, current_squat, current_bench, current_deadlift, current_weight, squat, bench, deadlift, weight, date, plan} = req.body
         console.log(req.body)
         
         await sql`
@@ -200,7 +200,7 @@ const createNewUser = async (req, res) =>{
 
         await sql`
         INSERT INTO clients (first_name, last_name, plan_week, current_squat, current_bench, current_deadlift, current_weight, workout_plan_id, login_id)
-        VALUES (${first_name}, ${last_name}, 1, ${parseInt(current_squat)}, ${parseInt(current_bench)}, ${parseInt(current_deadlift)}, ${parseInt(current_weight)}, 1, ${parseInt(loginId)})
+        VALUES (${first_name}, ${last_name}, 1, ${parseInt(current_squat)}, ${parseInt(current_bench)}, ${parseInt(current_deadlift)}, ${parseInt(current_weight)}, ${parseInt(plan)}, ${parseInt(loginId)})
         `
     
         const userId = await sql`
@@ -221,7 +221,8 @@ const createNewUser = async (req, res) =>{
     } catch (error) {
         throw error
     }
-}
+} /** Takes all of the inputs from the user and makes a new account in 
+the database from all of the inputs */
 
 const resetPassword = async (req, res) =>{
 
