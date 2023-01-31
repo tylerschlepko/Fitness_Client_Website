@@ -269,7 +269,7 @@ const deleteAccount = async (req, res) =>{
         
         `
         res.sendFile(path.join(process.cwd(), 'index.html'))
-    } catch (error) {
+        } catch (error) {
         throw error
     }
 }
