@@ -9,13 +9,13 @@ body {
 
   #first_title{
     color: rgb(245, 66, 66);
-    size: 3rem;
+    font-size: 2rem;
   }
 
   #second_title{
     color: cornflowerblue;
     font-style: italic;
-    size: 2rem;
+    font-size: 2rem;
   }
   
   form {
@@ -103,13 +103,14 @@ body {
   header img {
     float: left;
     margin-right: 20px;
-    height: 67px;
+    height: 4.80rem;
   }
   
   header h1 {
     display: inline-block;
     margin: 0;
     padding: 20px;
+    font-size: 2rem;
   }
   
   body {
@@ -169,8 +170,8 @@ body {
     opacity: 1;
     transition: opacity .5s ease-in-out;
     cursor: pointer;
-    height: 60px;
-    padding-top: 4px;
+    height: 50px;
+    padding-top: 13px;
   }
   
   .home:hover{
