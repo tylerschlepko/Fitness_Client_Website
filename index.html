@@ -1,27 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./index.js" defer></script>
-    <link href="/style.css" rel="stylesheet"></link>
-    <script src="/server.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="/jquery.js" defer=""></script>
+    <link href="/style.css" rel="stylesheet">
+    <script src="/server.js" defer=""></script>
     <title>Login Page</title>
 </head>
 <body>
+  <div id="index" style="display: none;">
     <header>
         <nav>
           <img src="logo.jpeg" alt="Logo">
           <h1><span id="first_title">Schlep</span> <span id="second_title">Fit</span></h1>
+          <img src="home.png" class="home" id="home" href="/">
         </nav>
       </header>
       <div class="container">
         <form id="user_login" action="/login" method="post">
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br>
+            <input type="text" id="username" name="username" required=""><br>
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br>
+            <input type="password" id="password" name="password" required=""><br>
             <input type="submit" value="Login">
           </form>
     </div>
@@ -29,5 +30,149 @@
       <a href="/create-account">Create an account</a> |
           <a href="/reset-password">Forgot your password?</a>
     </footer>
-</body>
-</html>
+  </div>
+  <div id="login" style="display: none;">
+    <header>
+        <nav>
+            <img src="logo.jpeg" alt="Logo">
+          <h1 id="user_header" name="1">Tyler Schlepko | Strength Plan | Week 6</h1>
+          <img src="home.png" class="home" onclick="href='/'">
+        </nav>
+    </header>
+    <div class="big_container">
+        <div class="container">
+        
+            <div id="goalNum" class="title">Goals</div>
+            <p>Squat: <span id="goalSquat" class="highlight">3 lbs</span></p>
+            <p>Bench: <span id="goalBench" class="highlight">3 lbs</span></p>
+            <p>Deadlift: <span id="goalDeadlift" class="highlight">3 lbs</span></p>
+            <p>Weight: <span id="goalWeight" class="highlight">221 lbs</span></p>
+            <p>Goal Review In: <span class="highlight" id="goal-time">47 days</span></p>
+        </div>
+        
+        <form id="update_current" action="/update_goals" method="post">
+            <h1>Update Your Goals</h1><br>
+            <label for="newSquat">Squat:</label>
+            <input type="number" id="newSquat" name="newSquat" required=""><br>
+            <label for="newBench">Bench:</label>
+            <input type="number" id="newBench" name="newBench" required=""><br>
+            <label for="newDeadlift">Deadlift:</label>
+            <input type="number" id="newDeadlift" name="newDeadlift" required=""><br>
+            <label for="newWeight">Weight:</label>
+            <input type="number" id="newWeight" name="newWeight" required=""><br>
+            <label for="newDate">Completion Date:</label>
+            <input type="date" placeholder="YYYY-MM-DD" id="newDate" name="newDate" required=""><br>
+            <input type="submit" value="Update">
+        </form>
+      </div>
+      <div class="big_container">
+        <div class="container">
+            <div class="title">Current Progress</div>
+            <p>Squat: <span id="currentSquat" class="highlight">405 lbs</span></p>
+            <p>Bench: <span id="currentBench" class="highlight">315 lbs</span></p>
+            <p>Deadlift: <span id="currentDeadlift" class="highlight">495 lbs</span></p>
+            <p>Weight: <span id="currentWeight" class="highlight">225 lbs</span></p>
+        </div>
+        <form id="update_current" action="/update_current" method="post">
+            <h1>Update Current Progress</h1><br>
+            <label for="updateSquat">Squat:</label>
+            <input type="number" id="updateSquat" name="updateSquat" required=""><br>
+            <label for="updateBench">Bench:</label>
+            <input type="number" id="updateBench" name="updateBench" required=""><br>
+            <label for="updateDeadlift">Deadlift:</label>
+            <input type="number" id="updateDeadlift" name="updateDeadlift" required=""><br>
+            <label for="updateWeight">Weight:</label>
+            <input type="number" id="updateWeight" name="updateWeight" required=""><br>
+            <input type="submit" value="Update">
+        </form>
+        <form id="deleteUser" method="post" action="/delete" style="display: none;">
+          <input type="submit" value="Delete User" id="delete">
+      </form>
+      </div>
+  </div>
+  
+
+    <div id="reset-password" style="">
+      <header>
+        <nav>
+          <img src="logo.jpeg" alt="Logo">
+          <h1>Reset Password</h1>
+          <img src="home.png" class="home" href="/">
+        </nav>
+      </header>
+      <div class="container">
+        <form action="/reset" method="post">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required="">
+          <br><br>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required="">
+          <br><br>
+          <label for="newPassword">New Password:</label>
+          <input type="password" id="newPassword" name="newPassword" required="">
+          <br><br>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    </div>
+      <div id="makeUser" style="display: none;">
+        <header>
+          <nav>
+            <img src="logo.jpeg" alt="Logo">
+            <h1>Create Account</h1>
+            <img src="home.png" class="home">
+          </nav>
+        </header>
+        <div class="container">
+          <form action="/make-account" method="post">
+            <h1>Input Your User Info</h1><br>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required="">
+            <br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required="">
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required="">
+            <br>
+            <h1>Input Your Current Info</h1><br>
+            <label for="first_name">First Name:</label>
+            <input type="first_name" id="first_name" name="first_name" required="">
+            <br>
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" required="">
+            <br>
+            <label for="current_squat">Squat:</label>
+            <input type="number" id="current_squat" name="current_squat" pattern="[0-9]*" required=""><br>
+            <label for="current_bench">Bench:</label>
+            <input type="number" id="current_bench" name="current_bench" pattern="[0-9]*" required=""><br>
+            <label for="current_deadlift">Deadlift:</label>
+            <input type="number" id="current_deadlift" name="current_deadlift" pattern="[0-9]*" required=""><br>
+            <label for="current_weight">Weight:</label>
+            <input type="number" id="current_weight" name="current_weight" pattern="[0-9]*" required=""><br>
+            <br>
+            <h1>Input Your Goals</h1><br>
+            <label for="squat">Squat:</label>
+            <input type="number" id="squat" name="squat" pattern="[0-9]*" required=""><br>
+            <label for="bench">Bench:</label>
+            <input type="number" id="bench" name="bench" pattern="[0-9]*" required=""><br>
+            <label for="deadlift">Deadlift:</label>
+            <input type="number" id="deadlift" name="deadlift" pattern="[0-9]*" required=""><br>
+            <label for="weight">Weight:</label>
+            <input type="number" id="weight" name="weight" pattern="[0-9]*" required=""><br>
+            <label for="date">Completion Date:</label>
+            <input type="date" placeholder="YYYY-MM-DD" id="date" name="date" required=""><br>
+            <h1>Select Your Program</h1><br>
+            <select name="plan">
+              <option value="1">Strength Plan</option>
+              <option value="2">Endurance Plan</option>
+              <option value="3">Power Plan</option>
+            </select>
+            <br>
+            <input type="submit" value="Create Account">
+          </form>
+        </div>
+      </div>
+
+
+</body></html>

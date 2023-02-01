@@ -6,6 +6,7 @@ import { get } from 'http';
 import postgres from 'postgres';
 import {JSDOM} from 'jsdom'
 
+
 dotenv.config()
 const sql = postgres(process.env.DATABASE_URL)
 const PORT = process.env.PORT
@@ -16,6 +17,8 @@ app.use(express.urlencoded())
 app.use(express.static(path.join(process.cwd(), 'public')))
 
 app.get('/', indexHtml)
+
+app.post('/', indexHtml)
 
 app.get('/create-account', createAccountLink)
 

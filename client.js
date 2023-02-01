@@ -6,7 +6,11 @@ import path from 'path'
 import fs from 'fs'
 import { html } from 'parse5';
 import {JSDOM} from 'jsdom'
+const { window } = new JSDOM("")
+import $ from 'jquery'
 import { time } from 'console';
+
+
 
 dotenv.config()
 
@@ -14,6 +18,19 @@ const sql = postgres(process.env.DATABASE_URL)
 
 const indexHtml = async (req, res) =>{ 
     try {
+        const htmlpath = path.join(process.cwd(), 'index.html')
+        const html = fs.readFileSync(htmlpath)
+        const dom = new JSDOM(html)
+        const {document} = dom.window
+        let jquery = ($)(dom.window)
+        jquery('#reset-password').hide()
+        jquery('#deleteUser').hide()
+        jquery('#login').hide()
+        jquery('#makeUser').hide()
+        jquery('#index').show()
+        res.sendFile(path.join(process.cwd(), 'index.html'))
+        const updatedHtml = dom.serialize()
+        fs.writeFileSync(htmlpath, updatedHtml, 'utf-8')
         res.sendFile(path.join(process.cwd(), 'index.html'))
     } catch (error) {
         throw error
@@ -22,18 +39,45 @@ const indexHtml = async (req, res) =>{
 
 const forgotPasswordLink = async (req, res) =>{ 
     try {
-        res.sendFile(path.join(process.cwd(), 'reset-password.html'))
+        const htmlpath = path.join(process.cwd(), 'index.html')
+        const html = fs.readFileSync(htmlpath)
+        const dom = new JSDOM(html)
+        const {document} = dom.window
+        let jquery = ($)(dom.window)
+        jquery('#reset-password').show()
+        jquery('#deleteUser').hide()
+        jquery('#login').hide()
+        jquery('#makeUser').hide()
+        jquery('#index').hide()
+
+        const updatedHtml = dom.serialize()
+        fs.writeFileSync(htmlpath, updatedHtml, 'utf-8')
+        res.sendFile(path.join(process.cwd(), 'index.html'))
     } catch (error) {
-        throw error
+        res.sendFile(path.join(process.cwd(), 'index.html'))
     }
 } /*gives the user the forgot password html file when clicking on the link*/
 
 const createAccountLink = async (req, res) =>{ 
     try {
-        res.sendFile(path.join(process.cwd(), 'create-account.html'))
+        const htmlpath = path.join(process.cwd(), 'index.html')
+        const html = fs.readFileSync(htmlpath)
+        const dom = new JSDOM(html)
+        const {document} = dom.window
+        let jquery = ($)(dom.window)
+        jquery('#reset-password').hide()
+        jquery('#deleteUser').hide()
+        jquery('#login').hide()
+        jquery('#makeUser').show()
+        jquery('#index').hide()
+
+        const updatedHtml = dom.serialize()
+        fs.writeFileSync(htmlpath, updatedHtml, 'utf-8')
+        res.sendFile(path.join(process.cwd(), 'index.html'))
     } catch (error) {
-        throw error
+        res.sendFile(path.join(process.cwd(), 'index.html'))
     }
+} /*give
 } /*gives the user the create account html file when clicking on the link*/
 
 const logInFunc =  async (req, res) =>{
@@ -67,7 +111,7 @@ const logInFunc =  async (req, res) =>{
         
 
 
-        const htmlpath = path.join(process.cwd(), 'login.html')
+        const htmlpath = path.join(process.cwd(), 'index.html')
         const html = fs.readFileSync(htmlpath)
         const dom = new JSDOM(html)
         const {document} = dom.window
@@ -91,9 +135,15 @@ const logInFunc =  async (req, res) =>{
 
         document.getElementById("user_header").innerHTML = user.first_name + " " + user.last_name + " | "  + plan + " | " + "Week " + user.plan_week
         document.getElementById("user_header").setAttribute('name', user.id)
+        let jquery = ($)(dom.window)
+        jquery('#reset-password').hide()
+        jquery('#deleteUser').hide()
+        jquery('#login').show()
+        jquery('#makeUser').hide()
+        jquery('#index').hide()
         const updatedHtml = dom.serialize()
         fs.writeFileSync(htmlpath, updatedHtml, 'utf-8')
-        res.sendFile(path.join(process.cwd(), 'login.html'))
+        res.sendFile(path.join(process.cwd(), 'index.html'))
     } catch (error) {
         res.sendFile(path.join(process.cwd(), 'index.html'))
     }
@@ -105,7 +155,7 @@ const updateGoals = async (req, res) =>{
     const {newSquat, newBench, newDeadlift, newWeight, newDate} = req.body
     
 
-    const htmlpath = path.join(process.cwd(), 'login.html')
+    const htmlpath = path.join(process.cwd(), 'index.html')
     const html = fs.readFileSync(htmlpath)
     const dom = new JSDOM(html)
     const {document} = dom.window
@@ -142,7 +192,7 @@ const updateGoals = async (req, res) =>{
 
     const updatedHtml = dom.serialize()
     fs.writeFileSync(htmlpath, updatedHtml, 'utf-8')
-    res.sendFile(path.join(process.cwd(), 'login.html'))
+    res.sendFile(path.join(process.cwd(), 'index.html'))
 }/**Updates all of the clients current goal from the inputs
 they put in the form */
 
@@ -150,7 +200,7 @@ const updateCurrent = async (req, res) =>{
     const {updateSquat, updateBench, updateDeadlift, updateWeight} = req.body
     
 
-    const htmlpath = path.join(process.cwd(), 'login.html')
+    const htmlpath = path.join(process.cwd(), 'index.html')
     const html = fs.readFileSync(htmlpath)
     const dom = new JSDOM(html)
     const {document} = dom.window
@@ -179,7 +229,7 @@ const updateCurrent = async (req, res) =>{
         
     const updatedHtml = dom.serialize()
     fs.writeFileSync(htmlpath, updatedHtml, 'utf-8')
-    res.sendFile(path.join(process.cwd(), 'login.html'))
+    res.sendFile(path.join(process.cwd(), 'index.html'))
 } /**Updates the client's current status from the 
 inputs they put in for the form */
 
@@ -200,7 +250,7 @@ const createNewUser = async (req, res) =>{
 
         await sql`
         INSERT INTO clients (first_name, last_name, plan_week, current_squat, current_bench, current_deadlift, current_weight, workout_plan_id, login_id)
-        VALUES (${first_name}, ${last_name}, 1, ${parseInt(current_squat)}, ${parseInt(current_bench)}, ${parseInt(current_deadlift)}, ${parseInt(current_weight)}, ${parseInt(plan)}, ${parseInt(loginId)})
+        VALUES (${first_name}, ${last_name}, 1, ${parseInt(squat)}, ${parseInt(bench)}, ${parseInt(deadlift)}, ${parseInt(weight)}, ${parseInt(plan)}, ${parseInt(loginId)})
         `
     
         const userId = await sql`
@@ -212,14 +262,26 @@ const createNewUser = async (req, res) =>{
 
         console.log(clientId)
     
-        await sql`
+        await sql` 
         INSERT INTO client_goals (squat, bench, deadlift, weight, time, client_id)
-        VALUES (${parseInt(squat)}, ${parseInt(bench)}, ${parseInt(deadlift)}, ${parseInt(weight)}, ${date}, ${parseInt(clientId)})
+        VALUES (${parseInt(current_squat)}, ${parseInt(current_bench)}, ${parseInt(current_deadlift)}, ${parseInt(current_weight)}, ${date}, ${parseInt(clientId)})
         `
 
+        const htmlpath = path.join(process.cwd(), 'index.html')
+        const html = fs.readFileSync(htmlpath)
+        const dom = new JSDOM(html)
+        const {document} = dom.window
+        let jquery = ($)(dom.window)
+        await jquery('#reset-password').hide()
+        await jquery('#deleteUser').hide()
+        await jquery('#login').hide()
+        await jquery('#makeUser').hide()
+        await jquery('#index').show()
+        const updatedHtml = dom.serialize()
+        fs.writeFileSync(htmlpath, updatedHtml, 'utf-8')
         res.sendFile(path.join(process.cwd(), 'index.html'))
     } catch (error) {
-        throw error
+        res.sendFile(path.join(process.cwd(), 'index.html'))
     }
 } /** Takes all of the inputs from the user and makes a new account in 
 the database from all of the inputs */
@@ -233,16 +295,28 @@ const resetPassword = async (req, res) =>{
         SET password = ${newPassword}
         WHERE username = ${username} and email = ${email}
         `
+        const htmlpath = path.join(process.cwd(), 'index.html')
+        const html = fs.readFileSync(htmlpath)
+        const dom = new JSDOM(html)
+        const {document} = dom.window
+        let jquery = ($)(dom.window)
+        jquery('#reset-password').hide()
+        jquery('#deleteUser').hide()
+        jquery('#login').hide()
+        jquery('#makeUser').hide()
+        jquery('#index').show()
+        const updatedHtml = dom.serialize()
+        fs.writeFileSync(htmlpath, updatedHtml, 'utf-8')
         res.sendFile(path.join(process.cwd(), 'index.html'))
     } catch (error) {
-        throw error
+        res.sendFile(path.join(process.cwd(), 'index.html'))
     }
 } /** Takes in clients username email and a new password 
 and updates their login with a new password */
 
 const deleteAccount = async (req, res) =>{
     try {
-        const htmlpath = path.join(process.cwd(), 'login.html')
+        const htmlpath = path.join(process.cwd(), 'index.html')
         const html = fs.readFileSync(htmlpath)
         const dom = new JSDOM(html)
         const {document} = dom.window
@@ -268,10 +342,20 @@ const deleteAccount = async (req, res) =>{
         DELETE FROM login WHERE id = ${id}
         
         `
+        
+        let jquery = ($)(dom.window)
+        jquery('#reset-password').hide()
+        jquery('#deleteUser').hide()
+        jquery('#login').hide()
+        jquery('#makeUser').hide()
+        jquery('#index').show()
+        const updatedHtml = dom.serialize()
+        fs.writeFileSync(htmlpath, updatedHtml, 'utf-8')
         res.sendFile(path.join(process.cwd(), 'index.html'))
         } catch (error) {
-        throw error
+        res.sendFile(path.join(process.cwd(), 'index.html'))
     }
-}
+} /** Takes the current logged in user and then deletes all of thier information
+from the database */
 
 export {forgotPasswordLink, createAccountLink, logInFunc, indexHtml, updateGoals, updateCurrent, createNewUser, resetPassword, deleteAccount}
