@@ -6,9 +6,7 @@ import path from 'path'
 import fs from 'fs'
 import { html } from 'parse5';
 import {JSDOM} from 'jsdom'
-const { window } = new JSDOM("")
 import $ from 'jquery'
-import { time } from 'console';
 
 
 
@@ -24,7 +22,7 @@ const indexHtml = async (req, res) =>{
         const {document} = dom.window
         let jquery = ($)(dom.window)
         jquery('#reset-password').hide()
-        jquery('#deleteUser').hide()
+        
         jquery('#login').hide()
         jquery('#makeUser').hide()
         jquery('#index').show()
@@ -33,7 +31,7 @@ const indexHtml = async (req, res) =>{
         fs.writeFileSync(htmlpath, updatedHtml, 'utf-8')
         res.sendFile(path.join(process.cwd(), 'index.html'))
     } catch (error) {
-        throw error
+        console.log(error)
     }
 } /*gives the user the initial html file*/
 
@@ -45,7 +43,7 @@ const forgotPasswordLink = async (req, res) =>{
         const {document} = dom.window
         let jquery = ($)(dom.window)
         jquery('#reset-password').show()
-        jquery('#deleteUser').hide()
+        
         jquery('#login').hide()
         jquery('#makeUser').hide()
         jquery('#index').hide()
@@ -54,9 +52,9 @@ const forgotPasswordLink = async (req, res) =>{
         fs.writeFileSync(htmlpath, updatedHtml, 'utf-8')
         res.sendFile(path.join(process.cwd(), 'index.html'))
     } catch (error) {
-        res.sendFile(path.join(process.cwd(), 'index.html'))
+        console.log(error)
     }
-} /*gives the user the forgot password html file when clicking on the link*/
+} /* unhides the forgot password div div and hides everything else when the user clicks on the link */
 
 const createAccountLink = async (req, res) =>{ 
     try {
@@ -66,7 +64,7 @@ const createAccountLink = async (req, res) =>{
         const {document} = dom.window
         let jquery = ($)(dom.window)
         jquery('#reset-password').hide()
-        jquery('#deleteUser').hide()
+        
         jquery('#login').hide()
         jquery('#makeUser').show()
         jquery('#index').hide()
@@ -75,10 +73,9 @@ const createAccountLink = async (req, res) =>{
         fs.writeFileSync(htmlpath, updatedHtml, 'utf-8')
         res.sendFile(path.join(process.cwd(), 'index.html'))
     } catch (error) {
-        res.sendFile(path.join(process.cwd(), 'index.html'))
+        console.log(error)
     }
-} /*give
-} /*gives the user the create account html file when clicking on the link*/
+} /* unhides the make user div and hides everything else when the user clicks on the link */
 
 const logInFunc =  async (req, res) =>{
     const {username, password} = req.body
@@ -137,7 +134,7 @@ const logInFunc =  async (req, res) =>{
         document.getElementById("user_header").setAttribute('name', user.id)
         let jquery = ($)(dom.window)
         jquery('#reset-password').hide()
-        jquery('#deleteUser').hide()
+        jquery('#deleteUser').show()
         jquery('#login').show()
         jquery('#makeUser').hide()
         jquery('#index').hide()
@@ -145,11 +142,11 @@ const logInFunc =  async (req, res) =>{
         fs.writeFileSync(htmlpath, updatedHtml, 'utf-8')
         res.sendFile(path.join(process.cwd(), 'index.html'))
     } catch (error) {
-        res.sendFile(path.join(process.cwd(), 'index.html'))
+        console.log('Wrong Password or Username')
     }
-} /**Checks if the user exists and if they do it sends them to the logged in
-page with all of their information from the database if they dont exist
-it will send them back the index html */
+} /**Checks if the user exists and if they do it unhides the logged in page div
+ with all of their information from the database if they dont exist
+it will console log an error */
 
 const updateGoals = async (req, res) =>{
     const {newSquat, newBench, newDeadlift, newWeight, newDate} = req.body
@@ -273,7 +270,6 @@ const createNewUser = async (req, res) =>{
         const {document} = dom.window
         let jquery = ($)(dom.window)
         await jquery('#reset-password').hide()
-        await jquery('#deleteUser').hide()
         await jquery('#login').hide()
         await jquery('#makeUser').hide()
         await jquery('#index').show()
@@ -281,7 +277,7 @@ const createNewUser = async (req, res) =>{
         fs.writeFileSync(htmlpath, updatedHtml, 'utf-8')
         res.sendFile(path.join(process.cwd(), 'index.html'))
     } catch (error) {
-        res.sendFile(path.join(process.cwd(), 'index.html'))
+        console.log(error)
     }
 } /** Takes all of the inputs from the user and makes a new account in 
 the database from all of the inputs */
@@ -301,7 +297,6 @@ const resetPassword = async (req, res) =>{
         const {document} = dom.window
         let jquery = ($)(dom.window)
         jquery('#reset-password').hide()
-        jquery('#deleteUser').hide()
         jquery('#login').hide()
         jquery('#makeUser').hide()
         jquery('#index').show()
@@ -309,7 +304,7 @@ const resetPassword = async (req, res) =>{
         fs.writeFileSync(htmlpath, updatedHtml, 'utf-8')
         res.sendFile(path.join(process.cwd(), 'index.html'))
     } catch (error) {
-        res.sendFile(path.join(process.cwd(), 'index.html'))
+        console.log(error)
     }
 } /** Takes in clients username email and a new password 
 and updates their login with a new password */
@@ -345,7 +340,7 @@ const deleteAccount = async (req, res) =>{
         
         let jquery = ($)(dom.window)
         jquery('#reset-password').hide()
-        jquery('#deleteUser').hide()
+        
         jquery('#login').hide()
         jquery('#makeUser').hide()
         jquery('#index').show()
@@ -353,7 +348,7 @@ const deleteAccount = async (req, res) =>{
         fs.writeFileSync(htmlpath, updatedHtml, 'utf-8')
         res.sendFile(path.join(process.cwd(), 'index.html'))
         } catch (error) {
-        res.sendFile(path.join(process.cwd(), 'index.html'))
+        console.log(error)
     }
 } /** Takes the current logged in user and then deletes all of thier information
 from the database */
