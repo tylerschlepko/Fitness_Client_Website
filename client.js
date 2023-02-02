@@ -54,7 +54,7 @@ const forgotPasswordLink = async (req, res) =>{
     } catch (error) {
         console.log(error)
     }
-} /* unhides the forgot password div div and hides everything else when the user clicks on the link */
+} /* unhides the forgot password div and hides everything else when the user clicks on the link */
 
 const createAccountLink = async (req, res) =>{ 
     try {
