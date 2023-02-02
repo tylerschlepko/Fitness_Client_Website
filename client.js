@@ -247,7 +247,7 @@ const createNewUser = async (req, res) =>{
 
         await sql`
         INSERT INTO clients (first_name, last_name, plan_week, current_squat, current_bench, current_deadlift, current_weight, workout_plan_id, login_id)
-        VALUES (${first_name}, ${last_name}, 1, ${parseInt(squat)}, ${parseInt(bench)}, ${parseInt(deadlift)}, ${parseInt(weight)}, ${parseInt(plan)}, ${parseInt(loginId)})
+        VALUES (${first_name}, ${last_name}, 1, ${parseInt(current_squat)}, ${parseInt(current_bench)}, ${parseInt(current_deadlift)}, ${parseInt(current_weight)}, ${parseInt(plan)}, ${parseInt(loginId)})
         `
     
         const userId = await sql`
@@ -261,7 +261,7 @@ const createNewUser = async (req, res) =>{
     
         await sql` 
         INSERT INTO client_goals (squat, bench, deadlift, weight, time, client_id)
-        VALUES (${parseInt(current_squat)}, ${parseInt(current_bench)}, ${parseInt(current_deadlift)}, ${parseInt(current_weight)}, ${date}, ${parseInt(clientId)})
+        VALUES (${parseInt(squat)}, ${parseInt(bench)}, ${parseInt(deadlift)}, ${parseInt(weight)}, ${date}, ${parseInt(clientId)})
         `
 
         const htmlpath = path.join(process.cwd(), 'index.html')
